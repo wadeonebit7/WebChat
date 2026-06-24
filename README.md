@@ -20,7 +20,7 @@ Aplicación web de chat interactivo por salas en tiempo real con almacenamiento 
 
 ```bash
 git clone <url-del-repositorio>
-cd chat-tiempo-real
+cd web-chat
 npm install
 ```
 
@@ -35,7 +35,7 @@ node server.js
 ## Estructura del proyecto
 
 ```
-libro-visitas/
+web-chat/
 ├── public/
 │   ├── css/
 │   │   └── style.css

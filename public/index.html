@@ -1,23 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Chat en Tiempo Real</title>
+    <title>Chat en Tiempo Real - Proyecto</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div id="chat-container">
+        <!-- Panel Izquierdo: Salas y Buscador -->
         <div id="chat-room-list">
+            <h3>Salas Disponibles</h3>
             <ul id="rooms"></ul>
+            <hr>
+            <h3>Buscar en Historial</h3>
+            <input type="text" id="search-input" placeholder="Buscar mensaje...">
+            <button id="search-btn">Buscar</button>
+            <div id="search-results"></div>
         </div>
+
+        <!-- Panel Derecho: Ventana de Chat -->
         <div id="chat-window">
+            <h2 id="room-title">Sala: General</h2>
+            
+            <!-- Scroll infinito -->
             <div id="message-container"></div>
+            
+            <!-- Emojis Básico -->
+            <div id="emoji-panel">
+                <button type="button" class="emoji-btn">😀</button>
+                <button type="button" class="emoji-btn">😂</button>
+                <button type="button" class="emoji-btn">🔥</button>
+                <button type="button" class="emoji-btn">👍</button>
+                <button type="button" class="emoji-btn">🎉</button>
+            </div>
+
             <form id="message-form">
                 <input type="text" id="message-input" placeholder="Escribe un mensaje..." required>
                 <button type="submit">Enviar</button>
             </form>
         </div>
     </div>
+
+    <!-- Alerta sonora -->
+    <audio id="notif-sound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-600.wav" preload="auto"></audio>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
 </body>

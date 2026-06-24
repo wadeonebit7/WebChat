@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -16,18 +15,27 @@ io.on('connection', (socket) => {
 
     socket.on('joinRoom', (room, username) => {
         socket.join(room);
+        socket.nombreUsuario = username;
+        socket.salaUsuario = room;
+
         if (!rooms[room]) rooms[room] = [];
-        rooms[room].push(username);
+        if (!rooms[room].includes(username)) rooms[room].push(username);
+
         io.to(room).emit('userJoined', username);
     });
 
-    socket.on('sendMessage', (message, room) => {
-        io.to(room).emit('message', message);
+    socket.on('sendMessage', (messageData, room) => {
+        io.to(room).emit('message', messageData);
     });
 
     socket.on('disconnect', () => {
         console.log('Usuario desconectado');
-        // Lógica para manejar la desconexión y actualizar las salas
+        if (socket.salaUsuario && socket.nombreUsuario) {
+            io.to(socket.salaUsuario).emit('message', {
+                user: 'Sistema',
+                text: `${socket.nombreUsuario} ha abandonado la sala.`
+            });
+        }
     });
 });
 
